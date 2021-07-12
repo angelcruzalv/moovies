@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moovies/widgets/export_widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -6,11 +7,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text("HomeScreen view"),
+        appBar: AppBar(
+          title: Text('Home'),
         ),
-      ),
-    );
+        body: Column(
+          children: [CardSwiper()],
+        ));
   }
 }

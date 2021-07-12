@@ -8,12 +8,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      initialRoute: 'home',
-      routes: {
-        'home': (_) => HomeScreen(),
-        'details': (_) => DetailsView(),
-      },
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Material App',
+        initialRoute: 'home',
+        routes: {
+          'home': (_) => HomeScreen(),
+          'details': (_) => DetailsView(),
+        },
+        theme: ThemeData.light().copyWith(
+            appBarTheme:
+                AppBarTheme(color: Color.fromRGBO(80, 111, 180, 1.0))));
   }
 }
