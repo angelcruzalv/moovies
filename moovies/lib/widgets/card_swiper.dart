@@ -9,7 +9,6 @@ class CardSwiper extends StatelessWidget {
     return Container(
         width: size.width * 1,
         height: size.height * .6,
-        color: Colors.red,
         child: Swiper(
           //Swiper
           itemWidth: size.width * 0.6,
@@ -23,7 +22,7 @@ class CardSwiper extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
                 placeholder: AssetImage('assets/no-image.jpg'),
-                image: AssetImage('assets/no-image.jpg'),
+                image: NetworkImage('https://via.placeholder.com/300x400'),
                 fit: BoxFit.cover,
               ),
             ),

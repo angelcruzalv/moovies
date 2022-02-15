@@ -7,9 +7,15 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('Home'),
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.search_outlined))
+          ],
         ),
-        body: Column(
-          children: [CardSwiper()],
+        body: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            Column(children: [CardSwiper(), MovieSlider()]),
+          ],
         ));
   }
 }
