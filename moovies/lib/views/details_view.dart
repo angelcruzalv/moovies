@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moovies/views/export_views.dart';
 import 'package:moovies/widgets/export_widgets.dart';
 
 class DetailsView extends StatelessWidget {
@@ -17,7 +18,7 @@ class DetailsView extends StatelessWidget {
           _OverView(),
           _OverView(),
           _OverView(),
-          MovieSlider()
+          CastingCards()
         ]))
       ],
     ));
@@ -39,6 +40,7 @@ class _CustomAppBar extends StatelessWidget {
           width: double.infinity,
           alignment: Alignment.bottomCenter,
           color: Colors.black26,
+          padding: EdgeInsets.only(bottom: 15),
           child: Text('movie.titles'),
         ),
         background: FadeInImage(
