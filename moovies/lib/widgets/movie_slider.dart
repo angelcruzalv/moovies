@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:moovies/models/models.dart';
 
 class MovieSlider extends StatelessWidget {
+  final List<Movie> movies;
+
+  const MovieSlider({Key? key, required this.movies}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 280,
-      color: Colors.red,
+      //color: Colors.red,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -21,8 +26,13 @@ class MovieSlider extends StatelessWidget {
             child: ListView.builder(
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemCount: 20,
-                itemBuilder: (_, int index) => _MoviePoster()),
+                itemCount: movies.length,
+                itemBuilder: (_, int index) {
+                  final movie = movies[index];
+                  return _MoviePoster(
+                    myMovie: movie,
+                  );
+                }),
           ),
         ],
       ),
@@ -31,28 +41,31 @@ class MovieSlider extends StatelessWidget {
 }
 
 class _MoviePoster extends StatelessWidget {
+  final Movie myMovie;
+
+  const _MoviePoster({Key? key, required this.myMovie}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 130,
-      color: Colors.green,
+      //color: Colors.green,
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Column(
         children: [
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, 'details',
-                arguments: 'movie-instance'),
+            onTap: () =>
+                Navigator.pushNamed(context, 'details', arguments: myMovie),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
                 placeholder: AssetImage('assets/no-image.jpg'),
-                image: NetworkImage('https://via.placeholder.com/300x400'),
+                image: NetworkImage(myMovie.fullPosterimgLink),
                 fit: BoxFit.cover,
               ),
             ),
           ),
           Text(
-            'Titulo de la pelicula en exhibicion',
+            myMovie.title,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
             textAlign: TextAlign.center,

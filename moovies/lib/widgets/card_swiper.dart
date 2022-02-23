@@ -10,15 +10,29 @@ class CardSwiper extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; //get screen size
 
+    if (this.movies.length == 0) {
+      return Container(
+        width: size.width * 1,
+        height: size.height * .6,
+        child: Center(
+          child: CircularProgressIndicator(
+            color: Colors.purple,
+          ),
+        ),
+      );
+    }
+
     return Container(
         width: size.width * 1,
         height: size.height * .6,
         child: Swiper(
+            loop: false,
+            autoplay: true,
             //Swiper
-            itemWidth: size.width * 0.6,
-            itemHeight: size.height * 0.9,
+            itemWidth: size.width * .8,
+            itemHeight: size.height * 0.6,
             itemCount: movies.length,
-            layout: SwiperLayout.DEFAULT,
+            layout: SwiperLayout.STACK,
             itemBuilder: (context, int index) {
               final movie = movies[index];
               // print(movie.fullPosterimgLink);

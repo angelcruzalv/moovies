@@ -7,11 +7,13 @@ class MoviesProvider extends ChangeNotifier {
   String _baseUrl = 'api.themoviedb.org';
   String _language = 'es-MX';
 
-  List<Movie> onDisplayMovies = [];
+  List<Movie> nowPlayingMovies = [];
+  List<Movie> popularMovies = [];
 
   MoviesProvider() {
     print('MoviesProvider started console test');
     this.getNowPlayingMovies();
+    this.getPopularMovies();
   }
   getNowPlayingMovies() async {
     var url = Uri.https(_baseUrl, '3/movie/now_playing',
@@ -20,10 +22,25 @@ class MoviesProvider extends ChangeNotifier {
     // Await the http get response, then decode the json-formatted response.
     final response = await http.get(url);
     //final Map<String, dynamic> decodedData = json.decode(response.body);
-    final nowPlaying = NowPlayingResponse.fromJson(response.body);
+    final nowPlayingResponse = NowPlayingResponse.fromJson(response.body);
 
     //print(nowPlaying.results[0].title);
-    onDisplayMovies = nowPlaying.results;
+    nowPlayingMovies = nowPlayingResponse.results;
+
+    notifyListeners();
+  }
+
+  getPopularMovies() async {
+    var url = Uri.https(_baseUrl, '3/movie/popular',
+        {'api_key': _apiKey, 'language': _language, 'page': '1'});
+
+    // Await the http get response, then decode the json-formatted response.
+    final response = await http.get(url);
+    //final Map<String, dynamic> decodedData = json.decode(response.body);
+    final popularResponse = PopularResponse.fromJson(response.body);
+
+    //print(nowPlaying.results[0].title);
+    popularMovies = [...popularMovies, ...popularResponse.results];
 
     notifyListeners();
   }

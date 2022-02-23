@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:moovies/models/movie.dart';
 import 'package:moovies/views/export_views.dart';
-import 'package:moovies/widgets/export_widgets.dart';
 
 class DetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String movie =
         ModalRoute.of(context)?.settings.arguments.toString() ?? 'no-movie';
-
+    final Movie myMovie;
     return Scaffold(
         body: CustomScrollView(
       slivers: [
         _CustomAppBar(),
         SliverList(
-            delegate: SliverChildListDelegate([
-          _PosterAndTitle(),
-          _OverView(),
-          _OverView(),
-          _OverView(),
-          CastingCards()
-        ]))
+            delegate: SliverChildListDelegate(
+                [_PosterAndTitle(), _OverView(), CastingCards()]))
       ],
     ));
   }
@@ -41,7 +37,7 @@ class _CustomAppBar extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           color: Colors.black26,
           padding: EdgeInsets.only(bottom: 15),
-          child: Text('movie.titles'),
+          child: Text('movie.title'),
         ),
         background: FadeInImage(
           placeholder: AssetImage('assets/no-image.jpg'),
@@ -59,7 +55,7 @@ class _PosterAndTitle extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Container(
       margin: EdgeInsets.only(top: 20),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
           ClipRRect(
@@ -101,7 +97,47 @@ class _PosterAndTitle extends StatelessWidget {
                     style: textTheme.caption,
                   )
                 ],
-              )
+              ),
+
+              // color: Colors.red,
+
+              Row(
+                children: [
+                  Container(
+                    height: 40,
+                    width: 40,
+                    child: SvgPicture.network(
+                        'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg'),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    height: 40,
+                    width: 40,
+                    child: SvgPicture.network(
+                        'https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg'),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    height: 40,
+                    width: 40,
+                    child: SvgPicture.network(
+                        'https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg'),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    height: 40,
+                    width: 40,
+                    child: SvgPicture.network(
+                        'https://upload.wikimedia.org/wikipedia/commons/2/28/Apple_TV_Plus_Logo.svg'),
+                  ),
+                ],
+              ),
             ],
           )
         ],
