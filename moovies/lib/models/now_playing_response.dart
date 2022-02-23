@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:moovies/models/movie.dart';
+import 'movie.dart';
 
 class NowPlayingResponse {
   NowPlayingResponse({

@@ -18,6 +18,13 @@ class Movie {
     required this.voteCount,
   });
 
+  get fullPosterimgLink {
+    if (this.posterPath != null)
+      return 'https://image.tmdb.org/t/p/w500${this.posterPath}';
+
+    return 'https://i.stack.imgur.com/GNhx0.png';
+  }
+
   bool adult;
   String? backdropPath;
   List<int> genreIds;

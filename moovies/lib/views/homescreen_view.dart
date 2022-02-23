@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:moovies/services/movies_provider.dart';
 import 'package:moovies/widgets/export_widgets.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final moviesProvider = Provider.of<MoviesProvider>(context, listen: true);
+
     return Scaffold(
         appBar: AppBar(
-          title: Text('Home'),
+          title: Text('Now Playing'),
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.search_outlined))
           ],
@@ -14,7 +18,12 @@ class HomeScreen extends StatelessWidget {
         body: ListView(
           physics: BouncingScrollPhysics(),
           children: [
-            Column(children: [CardSwiper(), MovieSlider()]),
+            Column(children: [
+              CardSwiper(
+                movies: moviesProvider.onDisplayMovies,
+              ),
+              MovieSlider()
+            ]),
           ],
         ));
   }
